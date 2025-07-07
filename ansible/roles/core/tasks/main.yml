@@ -1,0 +1,32 @@
+---
+- name: Set login banner
+  ansible.builtin.copy:
+    src: motd.txt
+    dest: /etc/motd
+
+- name: Update apt-cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  register: result
+  until: result is succeeded
+
+- name: Upgrade all packages 
+  ansible.builtin.apt:
+    upgrade: yes
+    state: latest
+
+- name: Install some packages
+  ansible.builtin.apt:
+    name: "{{ lyoko_extra_packages }}"
+    state: present
+  register: result
+  until: result is succeeded
+
+- name: "Set hostname to {{ lyoko_hostname }}"
+  ansible.builtin.hostname:
+    name: "{{ lyoko_hostname }}"
+
+- name: "Set timezone to {{ lyoko_timezone }}"
+  community.general.timezone:
+    name: "{{ lyoko_timezone }}"

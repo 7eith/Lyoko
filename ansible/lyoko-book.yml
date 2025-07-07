@@ -1,0 +1,19 @@
+---
+- name: Lyoko-Book
+  hosts: all
+
+  roles:
+    ###
+    ### Core
+    ###
+    - role: core
+      become: true
+    ###
+    ### Docker
+    ###
+    - role: geerlingguy.docker
+      vars:
+        docker_apt_filename: download_docker_com_linux_ubuntu
+      tags:
+        - docker
+      become: true

@@ -1,0 +1,8 @@
+# Will have docker access
+lyoko_user: "seith"
+
+# Email needed for Let's Encrypt SSL Certs
+lyoko_user_email: "lyoko@seith.cloud"
+
+# Domain used by Lyoko
+lyoko_domain: seith.cloud

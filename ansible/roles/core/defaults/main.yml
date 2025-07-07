@@ -1,0 +1,12 @@
+---
+# Hostname of the Server
+lyoko_hostname: pve-lyoko
+
+# Extra packages to install
+lyoko_extra_packages:
+  - smartmontools
+  - htop
+  - zsh
+
+# Timezone
+lyoko_timezone: Europe/Paris
