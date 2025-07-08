@@ -7,4 +7,3 @@ collections:
   - name: ansible.posix
   - name: community.docker
   - name: community.general
-  

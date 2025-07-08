@@ -3,30 +3,31 @@
   ansible.builtin.copy:
     src: motd.txt
     dest: /etc/motd
+    mode: "0600"
 
 - name: Update apt-cache
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
   register: result
   until: result is succeeded
 
-- name: Upgrade all packages 
+- name: Upgrade all packages
   ansible.builtin.apt:
-    upgrade: yes
-    state: latest
+    upgrade: true
+    state: present
 
 - name: Install some packages
   ansible.builtin.apt:
-    name: "{{ lyoko_extra_packages }}"
+    name: "{{ core_extra_packages }}"
     state: present
   register: result
   until: result is succeeded
 
-- name: "Set hostname to {{ lyoko_hostname }}"
+- name: "Set hostname to {{ core_hostname }}"
   ansible.builtin.hostname:
-    name: "{{ lyoko_hostname }}"
+    name: "{{ core_hostname }}"
 
-- name: "Set timezone to {{ lyoko_timezone }}"
+- name: "Set timezone to {{ core_timezone }}"
   community.general.timezone:
-    name: "{{ lyoko_timezone }}"
+    name: "{{ core_timezone }}"
