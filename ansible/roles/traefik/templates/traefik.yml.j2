@@ -1,0 +1,30 @@
+---
+entryPoints:
+  http:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: "https"
+          scheme: "https"
+  https:
+    address: ":443"
+
+serversTransport:
+  insecureSkipVerify: true
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+  file:
+    directory: /services
+    watch: true
+
+certificatesResolvers:
+  cloudflare:
+    acme:
+      email: "{{ lyoko_user_email }}"
+      storage: /letsencrypt/acme.json
+      dnsChallenge:
+        provider: "cloudflare"

@@ -31,3 +31,23 @@
 - name: "Set timezone to {{ core_timezone }}"
   community.general.timezone:
     name: "{{ core_timezone }}"
+
+- name: Create apps directory
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ lyoko_directory }}"
+    - "{{ apps_directory }}"
+
+- name: "Set user permissions to directories"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ lyoko_user }}"
+    group: "{{ lyoko_user }}"
+    mode: "0755"
+    recurse: true
+  with_items:
+    - "{{ lyoko_directory }}"
+    - "{{ apps_directory }}"

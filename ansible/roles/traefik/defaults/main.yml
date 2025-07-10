@@ -1,0 +1,11 @@
+---
+traefik_enabled: true
+
+# directories
+traefik_data_directory: "{{ apps_directory }}/traefik"
+
+traefik_container_name: "traefik"
+traefik_image_name: "traefik"
+traefik_image_version: "latest"
+
+traefik_cf_api_key: ""
