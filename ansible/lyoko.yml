@@ -1,20 +1,37 @@
 ---
-- name: Lyoko-Book
+- name: Lyoko
   hosts: all
 
   roles:
+
     ###
     ### Core
     ###
+
     - role: core
       become: true
+
     ###
     ### Docker
     ###
+
     - role: geerlingguy.docker
+      become: true
       vars:
         docker_apt_filename: download_docker_com_linux_ubuntu
       tags:
         - docker
         - skip_ansible_lint
+
+    - role: lyoko-docker
       become: true
+      tags:
+        - docker
+
+    ###
+    ### Apps
+    ###
+
+    - role: traefik
+      tags:
+        - traefik
