@@ -1,5 +1,6 @@
 ---
 - name: Start Traefik
+  when: traefik_enabled is true
   block:
     - name: Create Traefik Directories
       ansible.builtin.file:
@@ -17,10 +18,10 @@
       register: template_config
 
     - name: Traefik services configuration
-      template:
+      ansible.builtin.template:
         src: "{{ item }}"
-        dest: "{{ traefik_data_directory }}/services/{{ item | basename | regex_replace('\\.j2','') }}"
-        mode: 0644
+        dest: "{{ traefik_data_directory }}/services/{{ item | basename | regex_replace('\\.j2', '') }}"
+        mode: "0644"
       with_fileglob:
         - ../templates/services/*.j2
 
@@ -39,7 +40,7 @@
       when: not file_status.stat.exists
 
     - name: Create Proxy Docker Network
-      docker_network:
+      community.docker.docker_network:
         name: proxy
       register: network
 
@@ -62,4 +63,3 @@
           CF_API_KEY: "{{ traefik_cf_api_key }}"
         restart_policy: unless-stopped
         recreate: "{{ template_config is changed }}"
-  when: traefik_enabled is true
