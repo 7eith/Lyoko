@@ -1,0 +1,32 @@
+---
+- name: Start Homepage
+  when: homepage_enabled is true
+  block:
+    - name: Create Homepage Directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ homepage_data_directory }}"
+
+    - name: Create Homepage Docker Container
+      community.docker.docker_container:
+        name: "{{ homepage_container_name }}"
+        image: "{{ homepage_image_name }}:{{ homepage_image_version }}"
+        restart_policy: unless-stopped
+        networks:
+          - name: "proxy"
+        volumes:
+          - "{{ homepage_data_directory }}:/app/config"
+          - "/var/run/docker.sock:/var/run/docker.sock" # ?
+        env:
+          TZ: "{{ core_timezone }}"
+          HOMEPAGE_ALLOWED_HOSTS: "*"
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.homepage.rule: "Host(`{{ homepage_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.homepage.tls.certresolver: "cloudflare"
+          traefik.http.routers.homepage.tls.domains[0].main: "{{ lyoko_domain }}"
+          traefik.http.routers.homepage.tls.domains[0].sans: "*.{{ lyoko_domain }}"
+          traefik.http.services.homepage.loadbalancer.server.port: "3000"
+          traefik.docker.network: "proxy"

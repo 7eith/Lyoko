@@ -35,3 +35,7 @@
     - role: traefik
       tags:
         - traefik
+
+    - role: homepage
+      tags:
+        - homepage

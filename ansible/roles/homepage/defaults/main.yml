@@ -1,0 +1,9 @@
+homepage_enabled: true
+
+homepage_data_directory: "{{ apps_directory }}/homepage"
+
+homepage_container_name: "homepage"
+homepage_image_name: "ghcr.io/gethomepage/homepage"
+homepage_image_version: "latest"
+
+homepage_domain: "home"
