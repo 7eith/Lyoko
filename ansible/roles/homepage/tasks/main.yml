@@ -9,10 +9,23 @@
       with_items:
         - "{{ homepage_data_directory }}"
 
+    - name: Copy Homepage template config files
+      ansible.builtin.template:
+        src: "{{ item }}"
+        dest: "{{ homepage_data_directory }}/{{ item }}"
+      with_items:
+        - bookmarks.yaml
+        - docker.yaml
+        - settings.yaml
+        - services.yaml
+        - widgets.yaml
+      register: homepage_config
+
     - name: Create Homepage Docker Container
       community.docker.docker_container:
         name: "{{ homepage_container_name }}"
         image: "{{ homepage_image_name }}:{{ homepage_image_version }}"
+        restart: "{{ homepage_config is changed }}"
         restart_policy: unless-stopped
         networks:
           - name: "proxy"

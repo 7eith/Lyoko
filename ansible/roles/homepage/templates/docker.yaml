@@ -1,0 +1,3 @@
+---
+{{ lyoko_domain }}:
+  socket: /var/run/docker.sock

@@ -1,0 +1,25 @@
+- Developer:
+    - Github:
+        - icon: github
+          href: https://github.com/7eith
+          description: Public Git
+    - YouTube:
+        - icon: youtube
+          href: https://youtube.com/
+          description: Fun & Music
+    - Mail:
+        - icon: gmail
+          href: https://gmail.com/
+          description: E-mails
+    - PaaS:
+        - icon: coolify
+          href: https://paas.seith.cloud/
+          description: Platform as a Service
+    - Messenger:
+        - icon: facebook-messenger
+          href: https://messenger.com/
+          description: Chat 
+    - Notion:
+        - icon: notion
+          href: https://notion.so/
+          description: Take notes

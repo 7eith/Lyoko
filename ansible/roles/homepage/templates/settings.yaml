@@ -1,0 +1,4 @@
+---
+title: "{{ homepage_title }}"
+language: "{{ homepage_locale }}"
+showStats: true

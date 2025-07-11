@@ -7,3 +7,11 @@ homepage_image_name: "ghcr.io/gethomepage/homepage"
 homepage_image_version: "latest"
 
 homepage_domain: "home"
+
+# Templates
+homepage_title: Lyoko
+homepage_locale: en-GB
+
+# Proxmox | see for these vars here: https://gethomepage.dev/widgets/services/proxmox/
+homepage_data_proxmox_username: ""
+homepage_data_proxmox_password: ""

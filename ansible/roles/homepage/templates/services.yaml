@@ -1,0 +1,18 @@
+- Proxmox:
+  - PVE-Lyoko: # Lyoko:
+      href: https://192.168.1.16:8006
+      description: 192.168.1.16:8006
+      siteMonitor: https://192.168.1.16:8006
+      icon: proxmox.png
+      widget: 
+          type: proxmox
+          url: https://192.168.1.16:8006
+          username: {{ homepage_data_proxmox_username }}
+          password: {{ homepage_data_proxmox_password }}
+          fields: ["vms", "lxc", "resources.cpu", "resources.mem"]
+
+- Networking:
+    - Router:
+        icon: freebox-pop
+        href: http://192.168.1.254/
+        description: FreeBox OS

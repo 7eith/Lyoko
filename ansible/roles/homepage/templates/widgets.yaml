@@ -1,0 +1,12 @@
+- search:
+    provider: google # google, duckduckgo, bing, baidu, brave or custom
+    focus: true # Optional, will set focus to the search bar on page load
+    target: _blank # One of _self, _blank, _parent or _top
+- greeting:
+    text_size: xl
+    text: Lyoko
+- resources:
+    cpu: true
+    memory: true
+    uptime: true
+    refresh: 60000 # optional, in ms
