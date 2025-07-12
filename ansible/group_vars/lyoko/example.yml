@@ -1,0 +1,19 @@
+# Will have docker access
+lyoko_user: "seith"
+
+# Email needed for Let's Encrypt SSL Certs
+lyoko_user_email: "seith@gmail.com"
+
+# Domain used by Lyoko
+lyoko_domain: seith.cloud
+
+# Lyoko directory
+lyoko_directory: "/lyoko"
+
+# Apps directory
+apps_directory: "/lyoko/apps"
+
+traefik_cf_api_key: ""
+
+homepage_data_proxmox_username: ""
+homepage_data_proxmox_password: ""

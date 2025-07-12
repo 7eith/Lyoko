@@ -6,11 +6,12 @@
 
 - Ansible
 
-## Run
+## ✨ Setup & Run
 
 ```sh
 cd ansible
-ansible-playbook lyoko-book.yml -K -i inventory
+cp group_vars/lyoko/example.yml group_vars/lyoko/all.yml
+ansible-playbook lyoko.yml -K -i inventory
 ```
 
 ## ☁️ Applications
