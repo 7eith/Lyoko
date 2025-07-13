@@ -1,0 +1,16 @@
+vaultwarden_enabled: true
+
+vaultwarden_data_directory: "{{ apps_directory }}/vaultwarden"
+
+vaultwarden_container_name: "vaultwarden"
+vaultwarden_image_name: "vaultwarden/server"
+vaultwarden_image_version: "latest"
+
+# domain of vaultwarden
+vaultwarden_domain: "vault"
+
+# set to true, then to false and run ansible-playbook lyoko.yml -i inventory -t vaultwarden
+vaultwarden_allow_signups: true
+
+# see https://github.com/dani-garcia/vaultwarden/wiki/Enabling-admin-page#secure-the-admin_token
+vaultwarden_admin_token: ""

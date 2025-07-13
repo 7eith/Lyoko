@@ -39,3 +39,7 @@
     - role: homepage
       tags:
         - homepage
+
+    - role: vaultwarden
+      tags:
+        - vaultwarden
