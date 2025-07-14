@@ -10,5 +10,7 @@ lyoko_domain: seith.cloud
 # Lyoko directory
 lyoko_directory: "/lyoko"
 
-# Apps directory
-apps_directory: "/lyoko/apps"
+# Directories
+apps_directory: "{{ lyoko_directory }}/apps"
+alexandria_directory: "{{ lyoko_directory }}/alexandria"
+media_directory: "{{ alexandria_directory }}/media"

@@ -1,0 +1,35 @@
+---
+- name: Start Jellyfin
+  when: jellyfin_enabled is true
+  block:
+    - name: Create Jellyfin Directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      with_items:
+        - "{{ jellyfin_config_directory }}"
+
+    - name: Create Jellyfin Docker Container
+      community.docker.docker_container:
+        name: "{{ jellyfin_container_name }}"
+        image: "{{ jellyfin_image_name }}:{{ jellyfin_image_version }}"
+        volumes:
+          - "{{ jellyfin_config_directory }}:/config"
+          - "{{ media_directory }}:/data/media"
+        env:
+          TZ: "{{ core_timezone }}"
+          PUID: "{{ jellyfin_puid }}"
+          PGID: "{{ jellyfin_pgid }}"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.jellyfin.rule: "Host(`{{ jellyfin_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.jellyfin.tls.certresolver: "cloudflare"
+          traefik.http.routers.jellyfin.tls.domains[0].main: "{{ lyoko_domain }}"
+          traefik.http.routers.jellyfin.tls.domains[0].sans: "*.{{ lyoko_domain }}"
+          traefik.http.services.jellyfin.loadbalancer.server.port: "8096"
+          traefik.docker.network: "proxy"

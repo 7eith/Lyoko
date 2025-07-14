@@ -39,6 +39,8 @@
   with_items:
     - "{{ lyoko_directory }}"
     - "{{ apps_directory }}"
+    - "{{ alexandria_directory }}"
+    - "{{ media_directory }}"
 
 - name: "Set user permissions to directories"
   ansible.builtin.file:
@@ -51,3 +53,5 @@
   with_items:
     - "{{ lyoko_directory }}"
     - "{{ apps_directory }}"
+    - "{{ alexandria_directory }}"
+    - "{{ media_directory }}"

@@ -1,0 +1,12 @@
+jellyfin_enabled: true
+
+jellyfin_container_name: "jellyfin"
+jellyfin_image_name: "linuxserver/jellyfin"
+jellyfin_image_version: "latest"
+
+jellyfin_domain: "tv"
+
+jellyfin_config_directory: "{{ apps_directory }}/jellyfin"
+
+jellyfin_puid: "1000"
+jellyfin_pgid: "1000"

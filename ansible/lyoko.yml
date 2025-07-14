@@ -43,3 +43,8 @@
     - role: vaultwarden
       tags:
         - vaultwarden
+
+    - role: jellyfin
+      tags:
+        - jellyfin
+        - media
