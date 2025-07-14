@@ -1,0 +1,12 @@
+sonarr_enabled: true
+
+sonarr_container_name: "sonarr"
+sonarr_image_name: "linuxserver/sonarr"
+sonarr_image_version: "latest"
+
+sonarr_domain: "sonarr"
+
+sonarr_config_directory: "{{ apps_directory }}/sonarr"
+
+sonarr_puid: "1000"
+sonarr_pgid: "1000"

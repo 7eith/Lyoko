@@ -1,0 +1,35 @@
+---
+- name: Start Sonarr
+  when: sonarr_enabled is true
+  block:
+    - name: Create Sonarr Directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      with_items:
+        - "{{ sonarr_config_directory }}"
+
+    - name: Create Sonarr Docker Container
+      community.docker.docker_container:
+        name: "{{ sonarr_container_name }}"
+        image: "{{ sonarr_image_name }}:{{ sonarr_image_version }}"
+        volumes:
+          - "{{ sonarr_config_directory }}:/config"
+          - "{{ alexandria_directory }}:/data"
+        env:
+          TZ: "{{ core_timezone }}"
+          PUID: "{{ sonarr_puid }}"
+          PGID: "{{ sonarr_pgid }}"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.sonarr.rule: "Host(`{{ sonarr_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.sonarr.tls.certresolver: "cloudflare"
+          traefik.http.routers.sonarr.tls.domains[0].main: "{{ lyoko_domain }}"
+          traefik.http.routers.sonarr.tls.domains[0].sans: "*.{{ lyoko_domain }}"
+          traefik.http.services.sonarr.loadbalancer.server.port: "8989"
+          traefik.docker.network: "proxy"

@@ -48,3 +48,8 @@
       tags:
         - jellyfin
         - media
+
+    - role: sonarr
+      tags:
+        - sonarr
+        - media
