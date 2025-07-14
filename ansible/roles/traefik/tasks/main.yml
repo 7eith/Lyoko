@@ -48,11 +48,6 @@
       community.docker.docker_container:
         name: "{{ traefik_container_name }}"
         image: "{{ traefik_image_name }}:{{ traefik_image_version }}"
-        networks:
-          - name: "proxy"
-        ports:
-          - "80:80"
-          - "443:443"
         volumes:
           - "{{ traefik_data_directory }}/traefik.yml:/etc/traefik/traefik.yml:ro"
           - "{{ traefik_data_directory }}/letsencrypt:/letsencrypt:rw"
@@ -61,5 +56,11 @@
         env:
           CF_API_EMAIL: "{{ lyoko_user_email }}"
           CF_API_KEY: "{{ traefik_cf_api_key }}"
+        ports:
+          - "80:80"
+          - "443:443"
+        networks:
+          - name: "proxy"
+        pull: true
         restart_policy: unless-stopped
         recreate: "{{ template_config is changed }}"

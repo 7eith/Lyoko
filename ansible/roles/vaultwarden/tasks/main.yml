@@ -14,16 +14,17 @@
       community.docker.docker_container:
         name: "{{ vaultwarden_container_name }}"
         image: "{{ vaultwarden_image_name }}:{{ vaultwarden_image_version }}"
-        restart_policy: always
+        volumes:
+          - "{{ vaultwarden_data_directory }}:/data"
         env:
           DOMAIN: "https://{{ vaultwarden_domain }}.{{ lyoko_domain }}"
           SIGNUPS_ALLOWED: "{{ vaultwarden_allow_signups | string }}"
           ADMIN_TOKEN: "{{ vaultwarden_admin_token }}"
           LOG_FILE: "/data/bitwarden.log"
-        volumes:
-          - "{{ vaultwarden_data_directory }}:/data"
         networks:
           - name: "proxy"
+        pull: true
+        restart_policy: always
         labels:
           traefik.enable: "true"
           traefik.http.routers.vaultwarden.rule: "Host(`{{ vaultwarden_domain }}.{{ lyoko_domain }}`)"

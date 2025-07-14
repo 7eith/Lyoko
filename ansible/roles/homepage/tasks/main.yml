@@ -26,15 +26,16 @@
         name: "{{ homepage_container_name }}"
         image: "{{ homepage_image_name }}:{{ homepage_image_version }}"
         restart: "{{ homepage_config is changed }}"
-        restart_policy: unless-stopped
-        networks:
-          - name: "proxy"
         volumes:
           - "{{ homepage_data_directory }}:/app/config"
-          - "/var/run/docker.sock:/var/run/docker.sock" # ?
+          - "/var/run/docker.sock:/var/run/docker.sock"
         env:
           TZ: "{{ core_timezone }}"
           HOMEPAGE_ALLOWED_HOSTS: "*"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
         labels:
           traefik.enable: "true"
           traefik.http.routers.homepage.rule: "Host(`{{ homepage_domain }}.{{ lyoko_domain }}`)"
