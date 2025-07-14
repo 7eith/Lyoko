@@ -1,0 +1,12 @@
+prowlarr_enabled: true
+
+prowlarr_container_name: "prowlarr"
+prowlarr_image_name: "linuxserver/prowlarr"
+prowlarr_image_version: "develop" # always have last updates for trackers
+
+prowlarr_domain: "prowlarr"
+
+prowlarr_config_directory: "{{ apps_directory }}/prowlarr"
+
+prowlarr_puid: "1000"
+prowlarr_pgid: "1000"

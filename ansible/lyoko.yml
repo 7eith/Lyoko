@@ -44,6 +44,10 @@
       tags:
         - vaultwarden
 
+    ###
+    ### Media Server
+    ###
+
     - role: jellyfin
       tags:
         - jellyfin
@@ -52,4 +56,9 @@
     - role: sonarr
       tags:
         - sonarr
+        - media
+
+    - role: prowlarr
+      tags:
+        - prowlarr
         - media
