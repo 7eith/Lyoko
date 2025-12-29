@@ -62,3 +62,8 @@
       tags:
         - prowlarr
         - media
+
+    - role: qbittorrent
+      tags:
+        - qbittorrent
+        - media

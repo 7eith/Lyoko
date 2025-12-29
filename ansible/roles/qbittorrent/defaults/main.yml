@@ -1,0 +1,13 @@
+qbittorrent_enabled: true
+
+qbittorrent_container_name: "qbittorrent"
+qbittorrent_image_name: "lscr.io/linuxserver/qbittorrent"
+qbittorrent_image_version: "latest"
+
+qbittorrent_domain: "qb"
+qbittorrent_torrenting_port: "6881"
+
+qbittorrent_config_directory: "{{ apps_directory }}/qbittorrent/config"
+
+qbittorrent_puid: "1000"
+qbittorrent_pgid: "1000"

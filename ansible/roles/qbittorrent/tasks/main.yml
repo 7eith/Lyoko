@@ -1,0 +1,40 @@
+---
+- name: Start qBitTorrent
+  when: qbittorrent_enabled is true
+  block:
+    - name: Create qBitTorrent Directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      with_items:
+        - "{{ qbittorrent_config_directory }}"
+        - "{{ alexandria_directory }}/torrents"
+
+    - name: Create qBitTorrent Docker Container
+      community.docker.docker_container:
+        name: "{{ qbittorrent_container_name }}"
+        image: "{{ qbittorrent_image_name }}:{{ qbittorrent_image_version }}"
+        volumes:
+          - "{{ qbittorrent_config_directory }}:/config"
+          - "{{ alexandria_directory }}/torrents:/data/torrents"
+        env:
+          TZ: "{{ core_timezone }}"
+          PUID: "{{ qbittorrent_puid }}"
+          PGID: "{{ qbittorrent_pgid }}"
+          TORRENTING_PORT: "{{ qbittorrent_torrenting_port }}"
+        ports:
+          - "{{ qbittorrent_torrenting_port }}:6881"
+          - "{{ qbittorrent_torrenting_port }}:6881/udp"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.qbittorrent.rule: "Host(`{{ qbittorrent_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.qbittorrent.tls.certresolver: "cloudflare"
+          traefik.http.routers.qbittorrent.tls.domains[0].main: "{{ lyoko_domain }}"
+          traefik.http.routers.qbittorrent.tls.domains[0].sans: "*.{{ lyoko_domain }}"
+          traefik.http.services.qbittorrent.loadbalancer.server.port: "8080"
+          traefik.docker.network: "proxy"
