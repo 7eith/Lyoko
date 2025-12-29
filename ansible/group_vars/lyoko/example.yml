@@ -13,7 +13,10 @@ lyoko_directory: "/lyoko"
 # Apps directory
 apps_directory: "/lyoko/apps"
 
+# traefik api key from cloudflare (need Edit Zone + View Zone perms)
 traefik_cf_api_key: ""
+# generate using: echo $(htpasswd -nb admin your_password) | sed -e s/\\$/\\$\\$/g
+traefik_dashboard_auth: ""
 
 homepage_data_proxmox_username: ""
 homepage_data_proxmox_password: ""

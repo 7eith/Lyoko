@@ -77,3 +77,12 @@
         pull: true
         restart_policy: unless-stopped
         recreate: "{{ template_config is changed }}"
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.traefik.rule: "Host(`traefik.{{ traefik_domain }}`)"
+          traefik.http.routers.traefik.entrypoints: "websecure"
+          traefik.http.routers.traefik.tls.certresolver: "cloudflare"
+          traefik.http.routers.traefik.service: "api@internal"
+          traefik.http.routers.traefik.middlewares: "traefik-auth"
+          # setup password for dashboard
+          traefik.http.middlewares.traefik-auth.basicauth.users: "{{ traefik_dashboard_auth }}"
