@@ -67,6 +67,7 @@
           - "/var/run/docker.sock:/var/run/docker.sock:ro"
         env:
           CF_API_EMAIL: "{{ lyoko_user_email }}"
+          CF_DNS_API_TOKEN: "{{ traefik_cf_api_token }}"
           CF_API_KEY: "{{ traefik_cf_api_key }}"
         ports:
           - "80:80"
