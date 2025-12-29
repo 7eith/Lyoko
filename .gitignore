@@ -1,2 +1,2 @@
 .ansible/
-ansible/group_vars/lyoko/all.yml
+ansible/group_vars/all.yml
