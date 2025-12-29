@@ -10,6 +10,7 @@
         - "{{ traefik_data_directory }}"
         - "{{ traefik_data_directory }}/letsencrypt"
         - "{{ traefik_data_directory }}/services"
+        - "{{ traefik_data_directory }}/logs"
 
     - name: Template Traefik config.yml
       ansible.builtin.template:
@@ -62,6 +63,7 @@
           - "{{ traefik_data_directory }}/traefik.yml:/etc/traefik/traefik.yml:ro"
           - "{{ traefik_data_directory }}/letsencrypt:/letsencrypt:rw"
           - "{{ traefik_data_directory }}/services:/services:ro"
+          - "{{ traefik_data_directory }}/logs:/var/log/traefik:rw"
           - "/var/run/docker.sock:/var/run/docker.sock:ro"
         env:
           CF_API_EMAIL: "{{ lyoko_user_email }}"
