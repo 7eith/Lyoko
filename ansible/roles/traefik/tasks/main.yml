@@ -30,14 +30,24 @@
         path: "{{ traefik_data_directory }}/letsencrypt/acme.json"
       register: file_status
 
-    - name: Creates acme.json if it doesn't exists
+    - name: Create acme.json if it doesn't exist
       ansible.builtin.file:
         path: "{{ traefik_data_directory }}/letsencrypt/acme.json"
         state: touch
         owner: "{{ lyoko_user }}"
         group: "{{ lyoko_user }}"
         mode: "0600"
+        modification_time: preserve
+        access_time: preserve
       when: not file_status.stat.exists
+
+    - name: Ensure acme.json has correct permissions
+      ansible.builtin.file:
+        path: "{{ traefik_data_directory }}/letsencrypt/acme.json"
+        owner: "{{ lyoko_user }}"
+        group: "{{ lyoko_user }}"
+        mode: "0600"
+        state: file
 
     - name: Create Proxy Docker Network
       community.docker.docker_network:
