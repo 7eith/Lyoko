@@ -7,6 +7,8 @@
         path: "{{ item }}"
         state: directory
         mode: "0755"
+        owner: "{{ lyoko_user }}"
+        group: "{{ lyoko_user }}"
       with_items:
         - "{{ vaultwarden_data_directory }}"
 
@@ -21,15 +23,37 @@
           SIGNUPS_ALLOWED: "{{ vaultwarden_allow_signups | string }}"
           ADMIN_TOKEN: "{{ vaultwarden_admin_token }}"
           LOG_FILE: "/data/bitwarden.log"
+          WEBSOCKET_ENABLED: "true"
+          ROCKET_PORT: "80"
         networks:
           - name: "proxy"
         pull: true
-        restart_policy: always
+        restart_policy: unless-stopped
         labels:
           traefik.enable: "true"
+          
+          # Router
           traefik.http.routers.vaultwarden.rule: "Host(`{{ vaultwarden_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.vaultwarden.entrypoints: "websecure"
           traefik.http.routers.vaultwarden.tls.certresolver: "cloudflare"
-          traefik.http.routers.vaultwarden.tls.domains[0].main: "{{ lyoko_domain }}"
-          traefik.http.routers.vaultwarden.tls.domains[0].sans: "*.{{ lyoko_domain }}"
+          traefik.http.routers.vaultwarden.service: "vaultwarden"
+          
+          # WS Router
+          traefik.http.routers.vaultwarden-ws.rule: "Host(`{{ vaultwarden_domain }}.{{ lyoko_domain }}`) && Path(`/notifications/hub`)"
+          traefik.http.routers.vaultwarden-ws.entrypoints: "websecure"
+          traefik.http.routers.vaultwarden-ws.tls.certresolver: "cloudflare"
+          traefik.http.routers.vaultwarden-ws.service: "vaultwarden-ws"
+          
+          # Services
           traefik.http.services.vaultwarden.loadbalancer.server.port: "80"
+          traefik.http.services.vaultwarden-ws.loadbalancer.server.port: "3012"
+          
+          # Security Middlewares
+          traefik.http.routers.vaultwarden.middlewares: "vaultwarden-security"
+          traefik.http.middlewares.vaultwarden-security.headers.sslRedirect: "true"
+          traefik.http.middlewares.vaultwarden-security.headers.stsSeconds: "31536000"
+          traefik.http.middlewares.vaultwarden-security.headers.stsIncludeSubdomains: "true"
+          traefik.http.middlewares.vaultwarden-security.headers.stsPreload: "true"
+          
+          # Docker Proxy
           traefik.docker.network: "proxy"
