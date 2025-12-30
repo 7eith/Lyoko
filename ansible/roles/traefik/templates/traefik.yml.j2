@@ -22,9 +22,9 @@ entryPoints:
       tls:
         certResolver: cloudflare
         domains:
-          - main: "{{ traefik_domain }}"
+          - main: "{{ lyoko_domain }}"
             sans:
-              - "*.{{ traefik_domain }}"
+              - "*.{{ lyoko_domain }}"
     # fetch real cloudflare user IP
     forwardedHeaders:
       trustedIPs:

@@ -8,4 +8,5 @@ traefik_container_name: "traefik"
 traefik_image_name: "traefik"
 traefik_image_version: "latest"
 
-traefik_cf_api_key: ""
+traefik_cf_dns_api_token : ""
+traefik_dashboard_auth: ""
