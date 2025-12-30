@@ -28,7 +28,7 @@
         labels:
           traefik.enable: "true"
           traefik.http.routers.prowlarr.rule: "Host(`{{ prowlarr_domain }}.{{ lyoko_domain }}`)"
-          traefik.http.routers.prowlarr.tls.entrypoints: "websecure"
+          traefik.http.routers.prowlarr.entrypoints: "websecure"
           traefik.http.routers.prowlarr.tls.certresolver: "cloudflare"
           traefik.http.services.prowlarr.loadbalancer.server.port: "9696"
           traefik.docker.network: "proxy"
