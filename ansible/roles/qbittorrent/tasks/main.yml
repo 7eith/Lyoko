@@ -33,8 +33,8 @@
         labels:
           traefik.enable: "true"
           traefik.http.routers.qbittorrent.rule: "Host(`{{ qbittorrent_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.qbittorrent.entrypoints: "websecure"
           traefik.http.routers.qbittorrent.tls.certresolver: "cloudflare"
-          traefik.http.routers.qbittorrent.tls.domains[0].main: "{{ lyoko_domain }}"
-          traefik.http.routers.qbittorrent.tls.domains[0].sans: "*.{{ lyoko_domain }}"
+          traefik.http.routers.qbittorrent.service: "qbittorrent"
           traefik.http.services.qbittorrent.loadbalancer.server.port: "8080"
           traefik.docker.network: "proxy"

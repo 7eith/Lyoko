@@ -28,8 +28,8 @@
         labels:
           traefik.enable: "true"
           traefik.http.routers.jellyfin.rule: "Host(`{{ jellyfin_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.jellyfin.entrypoints: "websecure"
           traefik.http.routers.jellyfin.tls.certresolver: "cloudflare"
-          traefik.http.routers.jellyfin.tls.domains[0].main: "{{ lyoko_domain }}"
-          traefik.http.routers.jellyfin.tls.domains[0].sans: "*.{{ lyoko_domain }}"
+          traefik.http.routers.jellyfin.service: "jellyfin"
           traefik.http.services.jellyfin.loadbalancer.server.port: "8096"
           traefik.docker.network: "proxy"

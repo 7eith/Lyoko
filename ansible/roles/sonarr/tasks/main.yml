@@ -28,8 +28,7 @@
         labels:
           traefik.enable: "true"
           traefik.http.routers.sonarr.rule: "Host(`{{ sonarr_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.sonarr.entrypoints: "websecure"
           traefik.http.routers.sonarr.tls.certresolver: "cloudflare"
-          traefik.http.routers.sonarr.tls.domains[0].main: "{{ lyoko_domain }}"
-          traefik.http.routers.sonarr.tls.domains[0].sans: "*.{{ lyoko_domain }}"
           traefik.http.services.sonarr.loadbalancer.server.port: "8989"
           traefik.docker.network: "proxy"
