@@ -19,3 +19,8 @@ ansible-playbook lyoko.yml -K -i inventory
 - [Traefik](https://traefik.io/) - Web proxy and SSL certificate manager
 - [Homepage](https://gethomepage.dev/) - Highly customizable Dashboard
 - [Vaultwarden](https://github.com/dani-garcia/vaultwarden) - Password Manager
+- [Jellyfin](https://jellyfin.org/) - Media System
+- [qBitTorrent](https://www.qbittorrent.org/) - BitTorrent Client
+- [ProwlArr](https://prowlarr.com/) - Indexer Manager
+- [SonArr](https://sonarr.tv/) - Series Manager
+- [RadArr](https://radarr.video/) - Movies Manager
