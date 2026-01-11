@@ -4,6 +4,8 @@
     src: motd.txt
     dest: /etc/motd
     mode: "0600"
+  become: yes
+  ignore_errors: yes
 
 - name: Update apt-cache
   ansible.builtin.apt:
