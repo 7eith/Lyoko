@@ -9,7 +9,6 @@
         mode: "0755"
       with_items:
         - "{{ qbittorrent_config_directory }}"
-        - "{{ alexandria_directory }}/torrents"
 
     - name: Create qBitTorrent Docker Container
       community.docker.docker_container:

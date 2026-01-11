@@ -1,0 +1,34 @@
+---
+- name: Start Radarr
+  when: radarr_enabled is true
+  block:
+    - name: Create Radarr Directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      with_items:
+        - "{{ radarr_config_directory }}"
+
+    - name: Create Radarr Docker Container
+      community.docker.docker_container:
+        name: "{{ radarr_container_name }}"
+        image: "{{ radarr_image_name }}:{{ radarr_image_version }}"
+        volumes:
+          - "{{ radarr_config_directory }}:/config"
+          - "{{ alexandria_directory }}:/data"
+        env:
+          TZ: "{{ core_timezone }}"
+          PUID: "{{ radarr_puid }}"
+          PGID: "{{ radarr_pgid }}"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.radarr.rule: "Host(`{{ radarr_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.radarr.entrypoints: "websecure"
+          traefik.http.routers.radarr.tls.certresolver: "cloudflare"
+          traefik.http.services.radarr.loadbalancer.server.port: "7878"
+          traefik.docker.network: "proxy"
