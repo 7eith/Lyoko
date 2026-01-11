@@ -1,4 +1,4 @@
-homepage_enabled: true
+homepage_enabled: false
 
 homepage_data_directory: "{{ apps_directory }}/homepage"
 
