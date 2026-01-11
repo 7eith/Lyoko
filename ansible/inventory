@@ -1,2 +1,2 @@
 [lyoko]
-192.168.1.69
+pve-lyoko ansible_host=192.168.1.154 ansible_user=seith

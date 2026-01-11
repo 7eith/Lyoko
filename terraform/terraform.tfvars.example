@@ -1,0 +1,44 @@
+# Configuration Proxmox
+proxmox_api_url      = "https://192.168.1.100:8006/api2/json"
+proxmox_host         = "192.168.1.100"
+proxmox_user         = "root@pam"
+proxmox_password     = "your password"
+proxmox_tls_insecure = true
+
+# Configuration VM
+vm_name     = "lyoko"
+vm_template = "debian-13-cloudinit-template"
+target_node = "pve"
+
+# Resources VM
+vm_cores   = 4
+vm_sockets = 1
+vm_memory  = 6144
+vm_onboot  = true
+
+# Storage
+storage_name    = "local-lvm"
+disk_percentage = 95
+
+# Network
+network_bridge = "vmbr0"
+network_model  = "virtio"
+vm_ip          = "192.168.1.77"
+vm_gateway     = "192.168.1.254"
+vm_nameserver  = "192.168.1.254"
+
+# Cloud-Init
+ci_user     = "seith"
+ci_password = "DummyPass444!"
+
+# SSH public key
+ssh_private_key_path = "~/.ssh/id_ed25519"
+ssh_public_key = <<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAB... your key
+EOF
+
+# Ansible
+ansible_playbook_path  = "../ansible/lyoko.yml"
+ansible_inventory_path = "../ansible/inventory/hosts.yml"
+ansible_wait_time      = 45
+run_ansible            = true

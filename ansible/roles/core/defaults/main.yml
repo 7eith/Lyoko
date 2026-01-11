@@ -7,6 +7,10 @@ core_extra_packages:
   - smartmontools
   - htop
   - zsh
+  - gnupg
+  - ca-certificates
+  - apt-transport-https
+  - python3-docker
 
 # Timezone
 core_timezone: Europe/Paris

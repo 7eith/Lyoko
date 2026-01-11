@@ -54,6 +54,7 @@
       community.docker.docker_network:
         name: proxy
       register: network
+      become: yes
 
     - name: Traefik Docker Container
       community.docker.docker_container:
