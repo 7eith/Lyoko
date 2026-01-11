@@ -1,0 +1,12 @@
+radarr_enabled: true
+
+radarr_container_name: "radarr"
+radarr_image_name: "lscr.io/linuxserver/radarr"
+radarr_image_version: "latest"
+
+radarr_domain: "radarr"
+
+radarr_config_directory: "{{ apps_directory }}/radarr"
+
+radarr_puid: "1000"
+radarr_pgid: "1000"

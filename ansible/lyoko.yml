@@ -61,6 +61,11 @@
         - sonarr
         - media
 
+    - role: radarr
+      tags:
+        - radarr
+        - media
+
     - role: prowlarr
       tags:
         - prowlarr
