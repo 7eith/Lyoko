@@ -20,3 +20,7 @@ traefik_dashboard_auth: ""
 
 homepage_data_proxmox_username: ""
 homepage_data_proxmox_password: ""
+
+# generate service credentials use; https://my.nordaccount.com/dashboard/nordvpn/manual-configuration/service-credentials/
+nordvpn_username: ""
+nordvpn_password: ""

@@ -71,6 +71,11 @@
         - prowlarr
         - media
 
+    - role: gluetun
+      tags:
+        - gluetun
+        - media
+
     - role: qbittorrent
       tags:
         - qbittorrent

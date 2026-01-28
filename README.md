@@ -5,52 +5,31 @@
 ## ✨ Requirements
 
 - Proxmox
-- OpenTofu / Terraform
+- OpenTofu / Terraform (WIP)
 - Ansible
 
-## ✨ Setup (Proxmox)
+## ✨ Configuration (qBit - Gluetun - NordVPN)
 
-### Cloud-Init VM
+### 📌 qBit
 
-Download Debian (Trixie-13) and Configure the VM
+access to your qbit instance and update configuration to use gluetun as proxy
 
-```sh
-cd /tmp
-wget https://cloud.debian.org/images/cloud/trixie/latest/debian-13-generic-amd64.qcow2
+```md
+• Settings → Connection (Listening Port):
+Port used for incoming connections: RANDOM
 
-qm create 9000 --name debian-13-cloudinit-template --memory 2048 --net0 virtio,bridge=vmbr0
-qm importdisk 9000 debian-13-generic-amd64.qcow2 local-lvm
-qm set 9000 --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-9000-disk-0
-qm set 9000 --ide2 local-lvm:cloudinit
-qm set 9000 --boot c --bootdisk scsi0
-qm set 9000 --serial0 socket --vga serial0
-qm set 9000 --agent enabled=1
-qm template 9000
+• Settings → Connection (Proxy Server):
+HTTP - gluetun - 8888
+
+✅ use proxy for peer connections
+✅ use proxy for RSS purposes
+❌ use proxy for general purposes (webui)
 ```
 
-### Terraform Access
+### 📌 NordVPN
 
-Create Terraform Role
-
-```sh
-
-pveum role add Terraform -privs "Datastore.AllocateSpace Datastore.AllocateTemplate Datastore.Audit Pool.Allocate Pool.Audit Sys.Audit Sys.Console Sys.Modify VM.Allocate VM.Audit VM.Clone VM.Config.CDROM VM.Config.Cloudinit VM.Config.CPU VM.Config.Disk VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options VM.Migrate VM.PowerMgmt SDN.Use"
-```
-
-Create Terraform User
-
-```sh
-
-pveum user add terraform@pve --password <password> -comment "Terraform account"
-
-```
-
-Give Role to User
-
-```sh
-
-pveum aclmod / -user terraform@pve -role Terraform
-```
+go to the dashboard → Advanced Settings → Set up NordVPN Manually → [Service credentials](https://my.nordaccount.com/dashboard/nordvpn/manual-configuration/service-credentials/)
+use these credentials inside vars
 
 ## ✨ Setup & Run
 
@@ -70,3 +49,4 @@ ansible-playbook lyoko.yml -K -i inventory
 - [ProwlArr](https://prowlarr.com/) - Indexer Manager
 - [SonArr](https://sonarr.tv/) - Series Manager
 - [RadArr](https://radarr.video/) - Movies Manager
+- [Gluetun](https://github.com/qdm12/gluetun) - VPN Client in a thin Docker container

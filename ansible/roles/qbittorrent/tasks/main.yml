@@ -21,12 +21,10 @@
           TZ: "{{ core_timezone }}"
           PUID: "{{ qbittorrent_puid }}"
           PGID: "{{ qbittorrent_pgid }}"
-          TORRENTING_PORT: "{{ qbittorrent_torrenting_port }}"
-        ports:
-          - "{{ qbittorrent_torrenting_port }}:6881"
-          - "{{ qbittorrent_torrenting_port }}:6881/udp"
+          WEBUI_PORT: "8080"
         networks:
           - name: "proxy"
+          - name: "vpn"
         pull: true
         restart_policy: unless-stopped
         labels:

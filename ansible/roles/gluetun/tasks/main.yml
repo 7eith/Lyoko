@@ -1,0 +1,40 @@
+---
+- name: Start Gluetun VPN
+  when: gluetun_enabled is true
+  block:
+    - name: Create Gluetun Directory
+      ansible.builtin.file:
+        path: "{{ gluetun_config_directory }}"
+        state: directory
+        mode: "0755"
+
+    - name: Create VPN network if not exists
+      community.docker.docker_network:
+        name: vpn
+        state: present
+
+    - name: Create Gluetun Docker Container
+      community.docker.docker_container:
+        name: "{{ gluetun_container_name }}"
+        image: "{{gluetun_image_name}}:{{ gluetun_image_version }}"
+        capabilities:
+          - NET_ADMIN
+        devices:
+          - /dev/net/tun:/dev/net/tun
+        volumes:
+          - "{{ gluetun_config_directory }}:/gluetun"
+        env:
+          VPN_SERVICE_PROVIDER: "nordvpn"
+          VPN_TYPE: "openvpn"
+          OPENVPN_USER: "{{ nordvpn_username }}"
+          OPENVPN_PASSWORD: "{{ nordvpn_password }}"
+          SERVER_COUNTRIES: "{{ nordvpn_countries }}"
+          TZ: "{{ core_timezone }}"
+          # Proxy
+          HTTPPROXY: "on"
+          HTTPPROXY_LOG: "on"
+          HTTPPROXY_LISTENING_ADDRESS: ":8888"
+        networks:
+          - name: "vpn"
+        pull: true
+        restart_policy: unless-stopped

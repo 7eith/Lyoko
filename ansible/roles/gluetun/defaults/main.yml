@@ -1,0 +1,13 @@
+gluetun_enabled: true
+
+gluetun_config_directory: "{{ docker_home }}/gluetun"
+
+gluetun_container_name: gluetun
+gluetun_image_name: "qmcgaw/gluetun"
+gluetun_image_version: latest
+
+nordvpn_username: ""
+nordvpn_password: ""
+nordvpn_countries: "Germany"
+
+# qbittorrent_torrenting_port: "6881"
