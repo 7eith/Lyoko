@@ -8,6 +8,14 @@
 - OpenTofu / Terraform (WIP)
 - Ansible
 
+## ✨ Setup & Run
+
+```sh
+cd ansible
+cp group_vars/lyoko/example.yml group_vars/lyoko/all.yml
+ansible-playbook lyoko.yml -K -i inventory
+```
+
 ## ✨ Configuration (qBit - Gluetun - NordVPN)
 
 ### 📌 qBit
@@ -30,14 +38,6 @@ HTTP - gluetun - 8888
 
 go to the dashboard → Advanced Settings → Set up NordVPN Manually → [Service credentials](https://my.nordaccount.com/dashboard/nordvpn/manual-configuration/service-credentials/)
 use these credentials inside vars
-
-## ✨ Setup & Run
-
-```sh
-cd ansible
-cp group_vars/lyoko/example.yml group_vars/lyoko/all.yml
-ansible-playbook lyoko.yml -K -i inventory
-```
 
 ## ☁️ Applications
 
