@@ -16,29 +16,6 @@ cp group_vars/lyoko/example.yml group_vars/lyoko/all.yml
 ansible-playbook lyoko.yml -K -i inventory
 ```
 
-## ✨ Configuration (qBit - Gluetun - NordVPN)
-
-### 📌 qBit
-
-access to your qbit instance and update configuration to use gluetun as proxy
-
-```md
-• Settings → Connection (Listening Port):
-Port used for incoming connections: RANDOM
-
-• Settings → Connection (Proxy Server):
-HTTP - gluetun - 8888
-
-✅ use proxy for peer connections
-✅ use proxy for RSS purposes
-❌ use proxy for general purposes (webui)
-```
-
-### 📌 NordVPN
-
-go to the dashboard → Advanced Settings → Set up NordVPN Manually → [Service credentials](https://my.nordaccount.com/dashboard/nordvpn/manual-configuration/service-credentials/)
-use these credentials inside vars
-
 ## ☁️ Applications
 
 - [Traefik](https://traefik.io/) - Web proxy and SSL certificate manager

@@ -14,6 +14,7 @@
       community.docker.docker_container:
         name: "{{ qbittorrent_container_name }}"
         image: "{{ qbittorrent_image_name }}:{{ qbittorrent_image_version }}"
+        network_mode: "container:gluetun"
         volumes:
           - "{{ qbittorrent_config_directory }}:/config"
           - "{{ alexandria_directory }}/torrents:/data/torrents"
@@ -22,16 +23,5 @@
           PUID: "{{ qbittorrent_puid }}"
           PGID: "{{ qbittorrent_pgid }}"
           WEBUI_PORT: "8080"
-        networks:
-          - name: "proxy"
-          - name: "vpn"
         pull: true
         restart_policy: unless-stopped
-        labels:
-          traefik.enable: "true"
-          traefik.http.routers.qbittorrent.rule: "Host(`{{ qbittorrent_domain }}.{{ lyoko_domain }}`)"
-          traefik.http.routers.qbittorrent.entrypoints: "websecure"
-          traefik.http.routers.qbittorrent.tls.certresolver: "cloudflare"
-          traefik.http.routers.qbittorrent.service: "qbittorrent"
-          traefik.http.services.qbittorrent.loadbalancer.server.port: "8080"
-          traefik.docker.network: "proxy"

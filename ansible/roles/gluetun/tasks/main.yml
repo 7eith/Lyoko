@@ -8,11 +8,6 @@
         state: directory
         mode: "0755"
 
-    - name: Create VPN network if not exists
-      community.docker.docker_network:
-        name: vpn
-        state: present
-
     - name: Create Gluetun Docker Container
       community.docker.docker_container:
         name: "{{ gluetun_container_name }}"
@@ -21,6 +16,9 @@
           - NET_ADMIN
         devices:
           - /dev/net/tun:/dev/net/tun
+        ports:
+          - 6881:6881/tcp # qbittorrent
+          - 6881:6881/udp # qbittorrent
         volumes:
           - "{{ gluetun_config_directory }}:/gluetun"
         env:
@@ -30,11 +28,15 @@
           OPENVPN_PASSWORD: "{{ nordvpn_password }}"
           SERVER_COUNTRIES: "{{ nordvpn_countries }}"
           TZ: "{{ core_timezone }}"
-          # Proxy
-          HTTPPROXY: "on"
-          HTTPPROXY_LOG: "on"
-          HTTPPROXY_LISTENING_ADDRESS: ":8888"
         networks:
-          - name: "vpn"
+          - name: "proxy"
         pull: true
         restart_policy: unless-stopped
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.qbittorrent.rule: "Host(`{{ qbittorrent_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.qbittorrent.entrypoints: "websecure"
+          traefik.http.routers.qbittorrent.tls.certresolver: "cloudflare"
+          traefik.http.routers.qbittorrent.service: "qbittorrent"
+          traefik.http.services.qbittorrent.loadbalancer.server.port: "8080"
+          traefik.docker.network: "proxy"
