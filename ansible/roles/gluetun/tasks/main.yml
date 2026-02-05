@@ -22,12 +22,17 @@
         volumes:
           - "{{ gluetun_config_directory }}:/gluetun"
         env:
-          VPN_SERVICE_PROVIDER: "nordvpn"
-          VPN_TYPE: "openvpn"
-          OPENVPN_USER: "{{ nordvpn_username }}"
-          OPENVPN_PASSWORD: "{{ nordvpn_password }}"
-          SERVER_COUNTRIES: "{{ nordvpn_countries }}"
           TZ: "{{ core_timezone }}"
+          VPN_SERVICE_PROVIDER: "airvpn"
+          VPN_TYPE: "wireguard"
+          WIREGUARD_PRIVATE_KEY: "{{ wireguard_private_key }}"
+          WIREGUARD_PRESHARED_KEY: "{{ wireguard_preshared_key }}"
+          WIREGUARD_ADDRESSES: "{{ wireguard_addresses }}"
+          WIREGUARD_MTU: "1320"
+          DOT: "off"
+          DNS_UPDATE_PERIOD: "0"
+          FIREWALL_VPN_INPUT_PORTS: "{{ wireguard_forwarded_port }}"
+          SERVER_COUNTRIES: "{{ wireguard_countries }}"
         networks:
           - name: "proxy"
         pull: true
