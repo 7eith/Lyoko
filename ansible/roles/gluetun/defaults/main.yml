@@ -1,13 +1,13 @@
 gluetun_enabled: true
 
-gluetun_config_directory: "{{ docker_home }}/gluetun"
+gluetun_config_directory: "{{ apps_directory }}/gluetun"
 
 gluetun_container_name: gluetun
 gluetun_image_name: "qmcgaw/gluetun"
 gluetun_image_version: latest
 
-nordvpn_username: ""
-nordvpn_password: ""
-nordvpn_countries: "Germany"
-
-# qbittorrent_torrenting_port: "6881"
+wireguard_private_key: ""
+wireguard_preshared_key: ""
+wireguard_addresses: ""
+wireguard_forwarded_port: ""
+wireguard_countries: ""
