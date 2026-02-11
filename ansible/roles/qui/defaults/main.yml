@@ -1,0 +1,12 @@
+qui_enabled: true
+
+qui_container_name: "qui"
+qui_image_name: "ghcr.io/autobrr/qui"
+qui_image_version: "latest"
+
+qui_domain: "qi"
+
+qui_config_directory: "{{ apps_directory }}/qui"
+
+qui_puid: "1000"
+qui_pgid: "1000"

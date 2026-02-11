@@ -80,3 +80,8 @@
       tags:
         - qbittorrent
         - media
+
+    - role: qui
+      tags:
+        - qui
+        - media
