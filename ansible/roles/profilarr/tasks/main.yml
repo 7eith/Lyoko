@@ -1,0 +1,33 @@
+---
+- name: Start ProfilArr
+  when: profilarr_enabled is true
+  block:
+    - name: Create ProfilArr Directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      with_items:
+        - "{{ profilarr_config_directory }}"
+
+    - name: Create ProfilArr Docker Container
+      community.docker.docker_container:
+        name: "{{ profilarr_container_name }}"
+        image: "{{ profilarr_image_name }}:{{ profilarr_image_version }}"
+        volumes:
+          - "{{ profilarr_config_directory }}:/config"
+        env:
+          TZ: "{{ core_timezone }}"
+          PUID: "{{ profilarr_puid }}"
+          PGID: "{{ profilarr_pgid }}"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.profilarr.rule: "Host(`{{ profilarr_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.profilarr.entrypoints: "websecure"
+          traefik.http.routers.profilarr.tls.certresolver: "cloudflare"
+          traefik.http.services.profilarr.loadbalancer.server.port: "6868"
+          traefik.docker.network: "proxy"

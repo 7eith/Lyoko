@@ -85,3 +85,8 @@
       tags:
         - qui
         - media
+
+    - role: profilarr
+      tags:
+        - profilarr
+        - media

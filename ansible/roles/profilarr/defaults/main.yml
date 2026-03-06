@@ -1,0 +1,12 @@
+profilarr_enabled: true
+
+profilarr_container_name: "profilarr"
+profilarr_image_name: "santiagosayshey/profilarr"
+profilarr_image_version: "latest" 
+
+profilarr_domain: "profilarr"
+
+profilarr_config_directory: "{{ apps_directory }}/profilarr"
+
+profilarr_puid: "1000"
+profilarr_pgid: "1000"

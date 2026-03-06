@@ -28,3 +28,4 @@ ansible-playbook lyoko.yml -K -i inventory
 - [ProwlArr](https://prowlarr.com/) - Indexer Manager
 - [SonArr](https://sonarr.tv/) - Series Manager
 - [RadArr](https://radarr.video/) - Movies Manager
+- [ProfilArr](https://github.com/Dictionarry-Hub/profilarr) - Quality Profiles Manager ([My profiles](https://github.com/7eith/lyoko-arr-custom-formats))
