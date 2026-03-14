@@ -1,0 +1,8 @@
+ygege_enabled: true
+
+ygege_container_name: "ygege"
+ygege_image_name: "uwucode/ygege"
+ygege_image_version: "latest"
+
+ygege_puid: "1000"
+ygege_pgid: "1000"

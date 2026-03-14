@@ -1,0 +1,38 @@
+---
+- name: Start Ygege
+  when: ygege_enabled is true
+  block:
+    - name: Create Ygege Docker Container
+      community.docker.docker_container:
+        name: "{{ ygege_container_name }}"
+        image: "{{ ygege_image_name }}:{{ ygege_image_version }}"
+        env:
+          PUID: "{{ ygege_puid }}"
+          PGID: "{{ ygege_pgid }}"
+          LOG_LEVEL: "info"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
+
+    - name: Create custom definition folder
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      with_items:
+        - "{{ prowlarr_config_directory }}/Definitions/Custom"
+
+    - name: Download Ygege custom definition
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/UwUDev/ygege/master/ygege.yml
+        dest: "{{ prowlarr_config_directory }}/Definitions/Custom/ygege.yml"
+        mode: "0755"
+      register: ygege_config_download
+
+    - name: Restart ProwlArr Docker Container
+      community.docker.docker_container:
+        name: "{{ prowlarr_container_name }}"
+        state: started
+        restart: true
+      when: ygege_config_download.changed
