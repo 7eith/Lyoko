@@ -23,9 +23,9 @@
       with_items:
         - "{{ prowlarr_config_directory }}/Definitions/Custom"
 
-    - name: Download Ygege custom definition
-      ansible.builtin.get_url:
-        url: https://raw.githubusercontent.com/UwUDev/ygege/master/ygege.yml
+    - name: Copy Ygege custom definition
+      ansible.builtin.copy:
+        src: ygege.yml
         dest: "{{ prowlarr_config_directory }}/Definitions/Custom/ygege.yml"
         mode: "0755"
       register: ygege_config_download
