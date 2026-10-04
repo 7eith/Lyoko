@@ -1,0 +1,25 @@
+diun_enabled: true
+
+diun_container_name: "diun"
+diun_image_name: "crazymax/diun"
+diun_image_version: "latest"
+
+diun_data_directory: "{{ apps_directory }}/diun"
+
+# Discord webhook URL (Channel Settings -> Integrations -> Webhooks -> New Webhook)
+# Leave empty to run Diun without notifications
+diun_discord_webhook_url: ""
+# Optional list of users/roles to mention, e.g. ["@here", "<@&123456789>"]
+diun_discord_mentions: []
+
+# Update checks (cron expression, default: every 6 hours)
+diun_watch_schedule: "0 */6 * * *"
+diun_watch_workers: 10
+diun_watch_jitter: "30s"
+diun_watch_first_check_notif: false
+diun_watch_run_on_startup: true
+diun_watch_compare_digest: true
+
+# Watch every container by default (exclude one with the diun.enable=false label)
+diun_watch_by_default: true
+diun_watch_stopped: false

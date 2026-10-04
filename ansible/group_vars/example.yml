@@ -25,6 +25,10 @@ vaultwarden_allow_signups: true
 # generate with: openssl rand -base64 48
 vaultwarden_admin_token: ""
 
+# Diun (Docker image update notifications)
+# Discord webhook: Channel Settings -> Integrations -> Webhooks -> New Webhook
+diun_discord_webhook_url: ""
+
 # AirVPN WireGuard (https://airvpn.org/enter/ -> Config Generator -> WireGuard)
 # use the exact values from the generated config
 wireguard_private_key: ""

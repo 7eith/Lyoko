@@ -1,0 +1,32 @@
+---
+db:
+  path: /data/diun.db
+
+watch:
+  workers: {{ diun_watch_workers }}
+  schedule: "{{ diun_watch_schedule }}"
+  jitter: "{{ diun_watch_jitter }}"
+  firstCheckNotif: {{ diun_watch_first_check_notif | lower }}
+  runOnStartup: {{ diun_watch_run_on_startup | lower }}
+  compareDigest: {{ diun_watch_compare_digest | lower }}
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    watchByDefault: {{ diun_watch_by_default | lower }}
+    watchStopped: {{ diun_watch_stopped | lower }}
+{% if diun_discord_webhook_url | length > 0 %}
+
+notif:
+  discord:
+    webhookURL: "{{ diun_discord_webhook_url }}"
+{% if diun_discord_mentions | length > 0 %}
+    mentions:
+{% for mention in diun_discord_mentions %}
+      - "{{ mention }}"
+{% endfor %}
+{% endif %}
+    renderEmbeds: true
+    renderFields: true
+    timeout: 10s
+{% endif %}

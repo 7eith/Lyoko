@@ -1,0 +1,39 @@
+---
+- name: Start Diun
+  when: diun_enabled is true
+  block:
+    - name: Create Diun Directory
+      ansible.builtin.file:
+        path: "{{ diun_data_directory }}"
+        state: directory
+        mode: "0755"
+
+    - name: Warn when no Discord webhook is configured
+      ansible.builtin.debug:
+        msg: >-
+          diun_discord_webhook_url is empty: Diun will check for updates but
+          cannot notify you. Set it in group_vars/all.yml (see group_vars/example.yml).
+      when: diun_discord_webhook_url | length == 0
+
+    - name: Generate Diun Configuration
+      ansible.builtin.template:
+        src: diun.yml.j2
+        dest: "{{ diun_data_directory }}/diun.yml"
+        mode: "0644"
+
+    - name: Create Diun Docker Container
+      community.docker.docker_container:
+        name: "{{ diun_container_name }}"
+        image: "{{ diun_image_name }}:{{ diun_image_version }}"
+        command: serve
+        volumes:
+          - "{{ diun_data_directory }}:/data"
+          - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        env:
+          TZ: "{{ core_timezone }}"
+          DIUN_CONFIG: "/data/diun.yml"
+        labels:
+          # Don't notify about Diun itself
+          diun.enable: "false"
+        pull: true
+        restart_policy: unless-stopped

@@ -46,6 +46,14 @@
         - vaultwarden
 
     ###
+    ### Monitoring
+    ###
+
+    - role: diun
+      tags:
+        - diun
+
+    ###
     ### Media Server
     ###
 

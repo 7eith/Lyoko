@@ -39,3 +39,24 @@ sudo ./scripts/backup-lyoko.sh /mnt/usb/lyoko-backup
 - [RadArr](https://radarr.video/) - Movies Manager
 - [ProfilArr](https://github.com/Dictionarry-Hub/profilarr) - Quality Profiles Manager ([My profiles](https://github.com/7eith/lyoko-arr-custom-formats))
 - [Ygégé](https://github.com/uwucode/ygege) - YGG (ygg.gratis) Nostr indexer provider for Prowlarr
+- [Diun](https://crazymax.github.io/diun/) - Docker image update notifications (Discord)
+
+## 🔔 Update notifications
+
+Diun checks every 6 hours if a newer version of any app image is available and pings you on Discord. Create a webhook in your Discord channel (Channel Settings → Integrations → Webhooks → New Webhook) and put its URL in `group_vars/all.yml`:
+
+```yaml
+diun_discord_webhook_url: "https://discord.com/api/webhooks/..."
+```
+
+Then apply it with:
+
+```sh
+ansible-playbook lyoko.yml -K -i inventory --tags diun
+```
+
+Send yourself a test notification to confirm the webhook works:
+
+```sh
+docker exec diun diun notif test
+```
