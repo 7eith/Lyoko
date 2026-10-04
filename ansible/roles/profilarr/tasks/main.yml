@@ -10,6 +10,16 @@
       with_items:
         - "{{ profilarr_config_directory }}"
 
+    - name: Create ProfilArr Parser Docker Container
+      when: profilarr_parser_enabled is true
+      community.docker.docker_container:
+        name: "{{ profilarr_parser_container_name }}"
+        image: "{{ profilarr_parser_image_name }}:{{ profilarr_parser_image_version }}"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
+
     - name: Create ProfilArr Docker Container
       community.docker.docker_container:
         name: "{{ profilarr_container_name }}"
@@ -20,6 +30,10 @@
           TZ: "{{ core_timezone }}"
           PUID: "{{ profilarr_puid }}"
           PGID: "{{ profilarr_pgid }}"
+          UMASK: "{{ profilarr_umask }}"
+          ORIGIN: "{{ profilarr_origin }}"
+          PARSER_HOST: "{{ profilarr_parser_container_name }}"
+          PARSER_PORT: "{{ profilarr_parser_port }}"
         networks:
           - name: "proxy"
         pull: true

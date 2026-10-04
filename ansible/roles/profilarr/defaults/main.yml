@@ -1,12 +1,21 @@
 profilarr_enabled: true
 
 profilarr_container_name: "profilarr"
-profilarr_image_name: "santiagosayshey/profilarr"
-profilarr_image_version: "latest" 
+profilarr_image_name: "ghcr.io/dictionarry-hub/profilarr"
+profilarr_image_version: "latest"
+
+# Optional parser service, required for custom format / quality profile testing
+profilarr_parser_enabled: true
+profilarr_parser_container_name: "profilarr-parser"
+profilarr_parser_image_name: "ghcr.io/dictionarry-hub/profilarr-parser"
+profilarr_parser_image_version: "latest"
+profilarr_parser_port: "5000"
 
 profilarr_domain: "profilarr"
+profilarr_origin: "https://{{ profilarr_domain }}.{{ lyoko_domain }}"
 
 profilarr_config_directory: "{{ apps_directory }}/profilarr"
 
 profilarr_puid: "1000"
 profilarr_pgid: "1000"
+profilarr_umask: "022"
