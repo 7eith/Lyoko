@@ -11,6 +11,7 @@ core_extra_packages:
   - ca-certificates
   - apt-transport-https
   - python3-docker
+  - intel-microcode
 
 # Timezone
 core_timezone: Europe/Paris

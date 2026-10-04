@@ -12,7 +12,17 @@
 ```sh
 cd ansible
 cp group_vars/example.yml group_vars/all.yml
+ansible-galaxy role install -r requirements.yml
+ansible-galaxy collection install -r requirements.yml
 ansible-playbook lyoko.yml -K -i inventory
+```
+
+## 💾 Backup / migration
+
+Before wiping an old host, run the backup script on it. It stops the containers for a consistent snapshot, copies `/lyoko/apps` (app configs, databases, torrent stats/certificates) to a destination and starts them again. Media/torrents are intentionally not copied — copy the files you want to keep manually:
+
+```sh
+sudo ./scripts/backup-lyoko.sh /mnt/usb/lyoko-backup
 ```
 
 ## ☁️ Applications
@@ -28,3 +38,4 @@ ansible-playbook lyoko.yml -K -i inventory
 - [SonArr](https://sonarr.tv/) - Series Manager
 - [RadArr](https://radarr.video/) - Movies Manager
 - [ProfilArr](https://github.com/Dictionarry-Hub/profilarr) - Quality Profiles Manager ([My profiles](https://github.com/7eith/lyoko-arr-custom-formats))
+- [Ygégé](https://github.com/uwucode/ygege) - YGG (ygg.gratis) Nostr indexer provider for Prowlarr

@@ -5,19 +5,30 @@ lyoko_user: "seith"
 lyoko_user_email: "seith@gmail.com"
 
 # Domain used by Lyoko
-lyoko_domain: seith.cloud
+lyoko_domain: "seith.cloud"
 
-# Lyoko directory
+# Lyoko directory and derived paths
 lyoko_directory: "/lyoko"
-
-# Apps directory
-apps_directory: "/lyoko/apps"
+apps_directory: "{{ lyoko_directory }}/apps"
+alexandria_directory: "{{ lyoko_directory }}/alexandria"
+media_directory: "{{ alexandria_directory }}/media"
 
 # traefik api key from cloudflare (need Edit Zone + View Zone perms)
 traefik_cf_dns_api_token: ""
-# generate using: echo $(htpasswd -nb admin your_password) | sed -e s/\\$/\\$\\$/g
+# generate with: htpasswd -nb admin your_password
+# do NOT escape the $ characters: these values are NOT processed by docker compose
 traefik_dashboard_auth: ""
 
-# generate service credentials use; https://my.nordaccount.com/dashboard/nordvpn/manual-configuration/service-credentials/
-nordvpn_username: ""
-nordvpn_password: ""
+# Vaultwarden
+# set to false once your account is created
+vaultwarden_allow_signups: true
+# generate with: openssl rand -base64 48
+vaultwarden_admin_token: ""
+
+# AirVPN WireGuard (https://airvpn.org/enter/ -> Config Generator -> WireGuard)
+# use the exact values from the generated config
+wireguard_private_key: ""
+wireguard_preshared_key: ""
+wireguard_addresses: "" # e.g. "10.178.141.92/32"
+wireguard_forwarded_port: ""
+wireguard_countries: "" # e.g. "Switzerland,Netherlands"

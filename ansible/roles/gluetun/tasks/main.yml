@@ -46,3 +46,4 @@
           traefik.http.routers.qbittorrent.service: "qbittorrent"
           traefik.http.services.qbittorrent.loadbalancer.server.port: "8080"
           traefik.docker.network: "proxy"
+      register: gluetun_container

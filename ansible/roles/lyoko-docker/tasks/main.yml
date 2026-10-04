@@ -23,4 +23,6 @@
   ansible.builtin.copy:
     dest: /etc/docker/daemon.json
     content: "{{ docker_daemon_json | to_nice_json }}"
+    mode: "0644"
   register: docker_config
+  notify: Restart Docker

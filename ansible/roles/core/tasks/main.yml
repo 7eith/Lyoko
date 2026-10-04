@@ -3,7 +3,7 @@
   ansible.builtin.copy:
     src: motd.txt
     dest: /etc/motd
-    mode: "0600"
+    mode: "0644"
   become: yes
   ignore_errors: yes
 
@@ -16,7 +16,7 @@
 
 - name: Upgrade all packages
   ansible.builtin.apt:
-    upgrade: true
+    upgrade: safe
     state: present
 
 - name: Install some packages

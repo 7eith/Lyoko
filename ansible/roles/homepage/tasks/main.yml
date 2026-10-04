@@ -28,10 +28,10 @@
         restart: "{{ homepage_config is changed }}"
         volumes:
           - "{{ homepage_data_directory }}:/app/config"
-          - "/var/run/docker.sock:/var/run/docker.sock"
+          - "/var/run/docker.sock:/var/run/docker.sock:ro"
         env:
           TZ: "{{ core_timezone }}"
-          HOMEPAGE_ALLOWED_HOSTS: "*"
+          HOMEPAGE_ALLOWED_HOSTS: "{{ homepage_domain }}.{{ lyoko_domain }}"
         networks:
           - name: "proxy"
         pull: true

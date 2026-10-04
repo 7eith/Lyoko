@@ -15,6 +15,9 @@
         name: "{{ qbittorrent_container_name }}"
         image: "{{ qbittorrent_image_name }}:{{ qbittorrent_image_version }}"
         network_mode: "container:gluetun"
+        # Recreate when gluetun was recreated, otherwise this container keeps
+        # pointing at gluetun's old (removed) network namespace and loses network.
+        recreate: "{{ (gluetun_container is defined) and (gluetun_container.changed | default(false)) }}"
         volumes:
           - "{{ qbittorrent_config_directory }}:/config"
           - "{{ alexandria_directory }}/torrents:/data/torrents"

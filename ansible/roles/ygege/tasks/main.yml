@@ -27,7 +27,7 @@
       ansible.builtin.copy:
         src: ygege.yml
         dest: "{{ prowlarr_config_directory }}/Definitions/Custom/ygege.yml"
-        mode: "0755"
+        mode: "0644"
       register: ygege_config_download
 
     - name: Restart ProwlArr Docker Container

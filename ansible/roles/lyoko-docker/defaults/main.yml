@@ -7,3 +7,7 @@ docker_image_directory: "/var/lib/docker"
 
 docker_daemon_json:
   data-root: "{{ docker_image_directory }}"
+  log-driver: "json-file"
+  log-opts:
+    max-size: "10m"
+    max-file: "3"
