@@ -7,6 +7,8 @@
 - Debian (12+)
 - Ansible (Docker is installed automatically by the playbook)
 
+> Fresh machine? Follow the [Debian install & migration runbook](docs/debian-migration.md).
+
 ## ✨ Setup & Run
 
 ```sh
@@ -38,7 +40,6 @@ sudo ./scripts/backup-lyoko.sh /mnt/usb/lyoko-backup
 - [SonArr](https://sonarr.tv/) - Series Manager
 - [RadArr](https://radarr.video/) - Movies Manager
 - [ProfilArr](https://github.com/Dictionarry-Hub/profilarr) - Quality Profiles Manager ([My profiles](https://github.com/7eith/lyoko-arr-custom-formats))
-- [Ygégé](https://github.com/uwucode/ygege) - YGG (ygg.gratis) Nostr indexer provider for Prowlarr
 - [Diun](https://crazymax.github.io/diun/) - Docker image update notifications (Discord)
 
 ## 🔔 Update notifications

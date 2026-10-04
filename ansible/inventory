@@ -1,5 +1,5 @@
 [servers]
-lyoko ansible_host=192.168.1.154
+lyoko ansible_host=192.168.1.77
 
 [servers:vars]
 ansible_user=seith

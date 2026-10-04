@@ -96,9 +96,3 @@
       tags:
         - profilarr
         - media
-
-    # Ygg indexer
-    - role: ygege
-      tags:
-        - ygege
-        - media
