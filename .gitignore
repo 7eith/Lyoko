@@ -1,6 +1,9 @@
 .ansible/
 ansible/group_vars/all.yml
 
+# Ansible Galaxy roles (install with: ansible-galaxy role install -r requirements.yml)
+ansible/roles/geerlingguy.docker/
+
 # Local .terraform directories
 **/.terraform/*
 
