@@ -1,6 +1,6 @@
 ---
 # Hostname of the Server
-core_hostname: pve-lyoko
+core_hostname: lyoko
 
 # Extra packages to install
 core_extra_packages:

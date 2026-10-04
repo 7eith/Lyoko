@@ -4,15 +4,14 @@
 
 ## ✨ Requirements
 
-- Proxmox
-- OpenTofu / Terraform (WIP)
-- Ansible
+- Debian (12+)
+- Ansible (Docker is installed automatically by the playbook)
 
 ## ✨ Setup & Run
 
 ```sh
 cd ansible
-cp group_vars/lyoko/example.yml group_vars/lyoko/all.yml
+cp group_vars/example.yml group_vars/all.yml
 ansible-playbook lyoko.yml -K -i inventory
 ```
 

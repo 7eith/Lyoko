@@ -19,8 +19,6 @@
     - role: geerlingguy.docker
       become: true
       become_method: sudo
-      vars:
-        docker_apt_filename: download_docker_com_linux_ubuntu
       tags:
         - docker
         - skip_ansible_lint

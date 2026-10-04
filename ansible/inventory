@@ -1,6 +1,6 @@
-[lyoko]
-pve-lyoko ansible_host=192.168.1.154
+[servers]
+lyoko ansible_host=192.168.1.154
 
-[lyoko:vars]
+[servers:vars]
 ansible_user=seith
 ansible_ssh_private_key_file=~/.ssh/id_ed25519
