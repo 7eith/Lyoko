@@ -58,6 +58,10 @@
         icon: mdi-tune
         href: https://{{ profilarr_domain }}.{{ lyoko_domain }}
         description: Profils de qualité & custom formats
+    - Wizarr:
+        icon: wizarr.png
+        href: https://{{ wizarr_domain }}.{{ lyoko_domain }}
+        description: Invitations & onboarding des utilisateurs
 - Downloads:
     - qBittorrent:
         icon: qbittorrent.png

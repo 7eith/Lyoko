@@ -110,3 +110,8 @@
       tags:
         - seerr
         - media
+
+    - role: wizarr
+      tags:
+        - wizarr
+        - media

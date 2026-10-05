@@ -1,0 +1,15 @@
+wizarr_enabled: true
+
+wizarr_container_name: "wizarr"
+wizarr_image_name: "ghcr.io/wizarrrr/wizarr"
+wizarr_image_version: "latest"
+
+wizarr_domain: "wizarr"
+
+wizarr_config_directory: "{{ apps_directory }}/wizarr"
+
+wizarr_puid: "1000"
+wizarr_pgid: "1000"
+
+# Set to true only when using an external auth provider (Authelia, Authentik, ...)
+wizarr_disable_builtin_auth: "false"

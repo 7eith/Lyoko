@@ -44,6 +44,7 @@ sudo ./scripts/backup-lyoko.sh /mnt/usb/lyoko-backup
 - [Diun](https://crazymax.github.io/diun/) - Docker image update notifications (Discord)
 - [Beszel](https://beszel.dev/) - Lightweight server & container monitoring
 - [Seerr](https://github.com/seerr-team/seerr/) - Software for managing requests for your media library
+- [Wizarr](https://wizarr.dev/) - User invitation & onboarding system
 
 ## 🔔 Update notifications
 
