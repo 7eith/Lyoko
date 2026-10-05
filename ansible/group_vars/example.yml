@@ -31,10 +31,12 @@ diun_discord_webhook_url: ""
 
 # Homepage widgets (optional - leave empty to hide the widget)
 # API keys: Sonarr/Radarr/Prowlarr -> Settings -> General -> Security -> API Key
+#           Bazarr -> Settings -> General -> API Key (generated on first run)
 #           Jellyfin -> Dashboard -> API Keys -> +
 sonarr_api_key: ""
 radarr_api_key: ""
 prowlarr_api_key: ""
+bazarr_api_key: ""
 jellyfin_api_key: ""
 # qBittorrent WebUI credentials
 qbittorrent_username: ""

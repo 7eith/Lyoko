@@ -34,6 +34,16 @@
           url: http://radarr:7878
           key: "{{ radarr_api_key }}"
 {% endif %}
+    - Bazarr:
+        icon: bazarr.png
+        href: https://{{ bazarr_domain }}.{{ lyoko_domain }}
+        description: Gestion des sous-titres
+{% if bazarr_api_key | default('') | length > 0 %}
+        widget:
+          type: bazarr
+          url: http://bazarr:6767
+          key: "{{ bazarr_api_key }}"
+{% endif %}
     - Prowlarr:
         icon: prowlarr.png
         href: https://{{ prowlarr_domain }}.{{ lyoko_domain }}

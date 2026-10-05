@@ -72,6 +72,11 @@
         - radarr
         - media
 
+    - role: bazarr
+      tags:
+        - bazarr
+        - media
+
     - role: prowlarr
       tags:
         - prowlarr

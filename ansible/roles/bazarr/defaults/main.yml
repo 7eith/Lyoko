@@ -1,0 +1,12 @@
+bazarr_enabled: true
+
+bazarr_container_name: "bazarr"
+bazarr_image_name: "linuxserver/bazarr"
+bazarr_image_version: "latest"
+
+bazarr_domain: "bazarr"
+
+bazarr_config_directory: "{{ apps_directory }}/bazarr"
+
+bazarr_puid: "1000"
+bazarr_pgid: "1000"
