@@ -42,6 +42,7 @@ sudo ./scripts/backup-lyoko.sh /mnt/usb/lyoko-backup
 - [Bazarr](https://www.bazarr.media/) - Subtitle Manager for Sonarr/Radarr
 - [ProfilArr](https://github.com/Dictionarry-Hub/profilarr) - Quality Profiles Manager ([My profiles](https://github.com/7eith/lyoko-arr-custom-formats))
 - [Diun](https://crazymax.github.io/diun/) - Docker image update notifications (Discord)
+- [Beszel](https://beszel.dev/) - Lightweight server & container monitoring
 - [Seerr](https://github.com/seerr-team/seerr/) - Software for managing requests for your media library
 
 ## 🔔 Update notifications

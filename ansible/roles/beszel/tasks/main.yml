@@ -1,0 +1,64 @@
+---
+- name: Start Beszel
+  when: beszel_enabled is true
+  block:
+    - name: Create Beszel Directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      with_items:
+        - "{{ beszel_hub_data_directory }}"
+        - "{{ beszel_agent_data_directory }}"
+        - "{{ beszel_socket_directory }}"
+
+    - name: Warn when no agent key is configured
+      ansible.builtin.debug:
+        msg: >-
+          beszel_key is empty: the agent will not accept connections. Open the
+          Hub, click "Add System", copy the public key into group_vars/all.yml
+          (beszel_key), then re-run this role.
+      when: beszel_key | length == 0
+
+    - name: Create Beszel Hub Docker Container
+      community.docker.docker_container:
+        name: "{{ beszel_container_name }}"
+        image: "{{ beszel_image_name }}:{{ beszel_image_version }}"
+        volumes:
+          - "{{ beszel_hub_data_directory }}:/beszel_data"
+          - "{{ beszel_socket_directory }}:/beszel_socket"
+        env:
+          APP_URL: "https://{{ beszel_domain }}.{{ lyoko_domain }}"
+          TZ: "{{ core_timezone }}"
+          USER_EMAIL: "{{ beszel_username }}"
+          USER_PASSWORD: "{{ beszel_password }}"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.beszel.rule: "Host(`{{ beszel_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.beszel.entrypoints: "websecure"
+          traefik.http.routers.beszel.tls.certresolver: "cloudflare"
+          traefik.http.services.beszel.loadbalancer.server.port: "8090"
+          traefik.docker.network: "proxy"
+
+    - name: Create Beszel Agent Docker Container
+      community.docker.docker_container:
+        name: "{{ beszel_agent_container_name }}"
+        image: "{{ beszel_agent_image_name }}:{{ beszel_agent_image_version }}"
+        volumes:
+          - "{{ beszel_agent_data_directory }}:/var/lib/beszel-agent"
+          - "{{ beszel_socket_directory }}:/beszel_socket"
+          - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        env:
+          LISTEN: "/beszel_socket/beszel.sock"
+          KEY: "{{ beszel_key }}"
+        devices: "{{ beszel_smart_devices }}"
+        capabilities:
+          - SYS_RAWIO # SATA/ATA S.M.A.R.T. (SG_IO)
+          - SYS_ADMIN # NVMe S.M.A.R.T.
+        network_mode: host
+        pull: true
+        restart_policy: unless-stopped

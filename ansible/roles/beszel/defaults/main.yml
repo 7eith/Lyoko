@@ -1,0 +1,31 @@
+beszel_enabled: true
+
+beszel_container_name: "beszel"
+beszel_image_name: "henrygd/beszel"
+beszel_image_version: "latest"
+
+beszel_agent_container_name: "beszel-agent"
+beszel_agent_image_name: "henrygd/beszel-agent"
+# alpine variant bundles smartmontools for S.M.A.R.T. monitoring
+beszel_agent_image_version: "alpine"
+
+beszel_domain: "beszel"
+
+beszel_data_directory: "{{ apps_directory }}/beszel"
+beszel_hub_data_directory: "{{ beszel_data_directory }}/hub"
+beszel_agent_data_directory: "{{ beszel_data_directory }}/agent"
+beszel_socket_directory: "{{ beszel_data_directory }}/socket"
+
+# Hub first-run credentials (created on first start, also used by the
+# Homepage widget and the WebUI login)
+beszel_username: ""
+beszel_password: ""
+
+# Public SSH key shown in the Hub when adding a system (Add System).
+# Paste it in group_vars/all.yml (beszel_key) and re-run this role.
+beszel_key: ""
+
+# Disks passed to the agent for S.M.A.R.T. monitoring. Use controller device
+# paths (not partitions), listed with: smartctl --scan
+beszel_smart_devices:
+  - "/dev/sda"

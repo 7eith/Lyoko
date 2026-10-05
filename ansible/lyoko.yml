@@ -49,6 +49,10 @@
     ### Monitoring
     ###
 
+    - role: beszel
+      tags:
+        - beszel
+
     - role: diun
       tags:
         - diun

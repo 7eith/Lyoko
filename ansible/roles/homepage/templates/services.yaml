@@ -83,6 +83,18 @@
         icon: traefik.png
         href: https://traefik.{{ lyoko_domain }}
         description: Dashboard reverse proxy & certificats
+    - Beszel:
+        icon: beszel.png
+        href: https://{{ beszel_domain }}.{{ lyoko_domain }}
+        description: Métriques serveur & conteneurs
+{% if beszel_username | default('') | length > 0 %}
+        widget:
+          type: beszel
+          url: http://beszel:8090
+          username: "{{ beszel_username }}"
+          password: "{{ beszel_password }}"
+          version: 2
+{% endif %}
 - Networking:
     - Router:
         icon: freebox-pop
