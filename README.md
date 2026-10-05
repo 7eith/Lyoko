@@ -45,6 +45,7 @@ sudo ./scripts/backup-lyoko.sh /mnt/usb/lyoko-backup
 - [Beszel](https://beszel.dev/) - Lightweight server & container monitoring
 - [Seerr](https://github.com/seerr-team/seerr/) - Software for managing requests for your media library
 - [Wizarr](https://wizarr.dev/) - User invitation & onboarding system
+- [Jellystat](https://github.com/CyferShepard/Jellystat) - Jellyfin watch statistics dashboard
 
 ## 🔔 Update notifications
 

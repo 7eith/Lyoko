@@ -49,6 +49,13 @@ jellyfin_api_key: ""
 qbittorrent_username: ""
 qbittorrent_password: ""
 
+# Jellystat (Jellyfin watch statistics)
+# generate each with: openssl rand -hex 32
+jellystat_db_password: ""
+jellystat_jwt_secret: ""
+# Jellystat -> Settings -> API Key (used by the Homepage widget)
+jellystat_api_key: ""
+
 # AirVPN WireGuard (https://airvpn.org/enter/ -> Config Generator -> WireGuard)
 # use the exact values from the generated config
 wireguard_private_key: ""

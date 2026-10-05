@@ -1,0 +1,19 @@
+jellystat_enabled: true
+
+jellystat_container_name: "jellystat"
+jellystat_image_name: "cyfershepard/jellystat"
+jellystat_image_version: "latest"
+
+jellystat_db_container_name: "jellystat-db"
+jellystat_db_image_name: "postgres"
+jellystat_db_image_version: "18"
+
+jellystat_domain: "jellystat"
+
+jellystat_config_directory: "{{ apps_directory }}/jellystat"
+jellystat_db_directory: "{{ apps_directory }}/jellystat-db"
+
+jellystat_db_name: "jfstat"
+jellystat_db_user: "postgres"
+jellystat_db_password: ""
+jellystat_jwt_secret: ""
