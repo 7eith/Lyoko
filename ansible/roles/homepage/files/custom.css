@@ -1,0 +1,181 @@
+/* ============================================================
+   Lyoko — Synthwave / Miami Vice neon theme
+   #14061F night plum   |  #2A0F45 dark violet  |  #FF2D95 neon magenta
+   #FF5CC8 hot pink     |  #7B4DFF electric violet  |  #4B2A9C suit purple
+   #F5C6E0 soft blush   |  #FFFFFF white  |  #B9A3D6 lilac gray  |  #E0623F warm accent
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ---------- palette variables (base theme: color: gray) ---------- */
+.theme-gray {
+  --color-50: 255 255 255;
+  --color-100: 245 198 224;
+  --color-200: 255 255 255;   /* text */
+  --color-300: 245 198 224;
+  --color-400: 185 163 214;   /* muted / lilac gray */
+  --color-500: 123 77 255;    /* electric violet */
+  --color-600: 75 42 156;     /* suit purple */
+  --color-700: 42 15 69;      /* dark violet */
+  --color-800: 20 6 31;       /* night plum */
+  --color-900: 10 3 16;       /* deepest night */
+  --color-logo-start: 255 45 149;
+  --color-logo-stop: 123 77 255;
+
+  --standard-bg: rgba(123, 77, 255, 0.25);
+
+  /* information widgets */
+  --info-widgets: #F5C6E0;
+  --resource-bar-bg: rgba(75, 42, 156, 0.45);
+  --resource-bar-fg: #FF2D95;
+  --widget-border: rgba(255, 45, 149, 0.35);
+
+  /* services */
+  --service-group: #FF5CC8;
+  --service-name: #FFFFFF;
+  --service-description: #B9A3D6;
+  --service-block-bg: #2A0F45;
+  --service-block-text: #FF5CC8;
+
+  /* bookmarks */
+  --bookmark-group: #FF5CC8;
+  --bookmark-icon-bg: rgba(75, 42, 156, 0.45);
+  --bookmark-icon: #7B4DFF;
+  --bookmark-name: #FFFFFF;
+
+  /* cards */
+  --card-color: rgba(42, 15, 69, 0.75);
+  --card-color-hover: rgba(75, 42, 156, 0.65);
+
+  /* footer + scrollbar */
+  --footer-items: #FF5CC8;
+  --scrollbar-fg: #7B4DFF;
+  --scrollbar-bg: rgba(42, 15, 69, 0.6);
+}
+
+/* ---------- background: night plum + blurred pink/violet bokeh ---------- */
+body {
+  background-color: #14061F !important;
+  background-image:
+    radial-gradient(42rem 30rem at 12% 18%, rgba(255, 45, 149, 0.22), transparent 70%),
+    radial-gradient(46rem 32rem at 88% 10%, rgba(123, 77, 255, 0.26), transparent 70%),
+    radial-gradient(50rem 36rem at 72% 88%, rgba(255, 92, 200, 0.14), transparent 70%),
+    radial-gradient(40rem 30rem at 20% 85%, rgba(75, 42, 156, 0.35), transparent 70%),
+    linear-gradient(180deg, #14061F 0%, #1C0930 55%, #2A0F45 80%, #4B1A6E 100%);
+  background-attachment: fixed !important;
+  font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+/* ---------- typography: brush-script wordmark for big headings only ---------- */
+.service-group-name,
+.bookmark-group-name {
+  font-family: 'Pacifico', cursive !important;
+  font-size: 1.55rem !important;
+  color: #F5C6E0 !important;
+  transform: skewX(-6deg);
+  text-shadow:
+    0 0 10px rgba(255, 45, 149, 0.75),
+    0 0 24px rgba(123, 77, 255, 0.45);
+}
+
+/* ---------- information widgets ---------- */
+#information-widgets {
+  border: 1px solid var(--widget-border);
+  border-radius: 16px;
+  background: rgba(42, 15, 69, 0.35);
+  backdrop-filter: blur(12px);
+}
+
+/* ---------- cards: rounded, neon bloom instead of shadow ---------- */
+.service-card,
+li.bookmark > a {
+  border-radius: 14px !important;
+  border: 1px solid rgba(255, 45, 149, 0.18);
+  box-shadow: 0 0 16px rgba(255, 45, 149, 0.1);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.service-card:hover,
+li.bookmark > a:hover {
+  border-color: rgba(255, 92, 200, 0.75);
+  box-shadow:
+    0 0 16px rgba(255, 45, 149, 0.45),
+    0 0 36px rgba(123, 77, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* chunky white outline + glow around icons (retro TV logo) */
+.service img {
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  padding: 4px;
+  background: rgba(20, 6, 31, 0.65);
+  box-shadow: 0 0 16px rgba(255, 45, 149, 0.35);
+}
+
+/* ---------- status colors (keep semantics readable) ---------- */
+.bg-emerald-500,
+.bg-green-500,
+.bg-lime-500 {
+  background-color: #3DFFA2 !important; /* up - neon mint */
+}
+
+.bg-red-500,
+.bg-rose-500 {
+  background-color: #FF4D6D !important; /* down */
+}
+
+.bg-yellow-500,
+.bg-amber-500,
+.bg-orange-400,
+.bg-orange-500 {
+  background-color: #E0623F !important; /* warning - warm accent */
+}
+
+.bg-blue-500,
+.bg-sky-500,
+.bg-cyan-500,
+.bg-indigo-500,
+.bg-purple-500,
+.bg-violet-500 {
+  background-color: #7B4DFF !important; /* info - electric violet */
+}
+
+.bg-pink-500,
+.bg-fuchsia-500 {
+  background-color: #FF2D95 !important; /* primary - neon magenta */
+}
+
+.text-white {
+  color: #FFFFFF !important;
+}
+
+/* ---------- top banner ---------- */
+#information-widgets {
+  flex-wrap: wrap;
+}
+
+#information-widgets > li:has(img[src*="lyoko-banner"]),
+#information-widgets > *:has(img[src*="lyoko-banner"]) {
+  flex: 1 1 100%;
+}
+
+img[src*="lyoko-banner"] {
+  display: block;
+  width: 100%;
+  max-width: 1150px;
+  height: auto;
+  margin: 0 auto 6px;
+  filter: drop-shadow(0 0 22px rgba(255, 45, 149, 0.35));
+}
+
+/* ---------- selection + scrollbar ---------- */
+::selection {
+  background: rgba(255, 45, 149, 0.45);
+  color: #FFFFFF;
+}
+
+* {
+  --scrollbar-thumb: #7B4DFF;
+  --scrollbar-track: rgba(42, 15, 69, 0.6);
+}

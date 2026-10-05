@@ -29,6 +29,17 @@ vaultwarden_admin_token: ""
 # Discord webhook: Channel Settings -> Integrations -> Webhooks -> New Webhook
 diun_discord_webhook_url: ""
 
+# Homepage widgets (optional - leave empty to hide the widget)
+# API keys: Sonarr/Radarr/Prowlarr -> Settings -> General -> Security -> API Key
+#           Jellyfin -> Dashboard -> API Keys -> +
+sonarr_api_key: ""
+radarr_api_key: ""
+prowlarr_api_key: ""
+jellyfin_api_key: ""
+# qBittorrent WebUI credentials
+qbittorrent_username: ""
+qbittorrent_password: ""
+
 # AirVPN WireGuard (https://airvpn.org/enter/ -> Config Generator -> WireGuard)
 # use the exact values from the generated config
 wireguard_private_key: ""

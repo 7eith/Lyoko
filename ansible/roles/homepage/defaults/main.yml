@@ -1,6 +1,7 @@
-homepage_enabled: false
+homepage_enabled: true
 
 homepage_data_directory: "{{ apps_directory }}/homepage"
+homepage_images_directory: "{{ homepage_data_directory }}/images"
 
 homepage_container_name: "homepage"
 homepage_image_name: "ghcr.io/gethomepage/homepage"

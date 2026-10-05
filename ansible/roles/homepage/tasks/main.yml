@@ -8,6 +8,7 @@
         state: directory
       with_items:
         - "{{ homepage_data_directory }}"
+        - "{{ homepage_images_directory }}"
 
     - name: Copy Homepage template config files
       ansible.builtin.template:
@@ -21,13 +22,26 @@
         - widgets.yaml
       register: homepage_config
 
+    - name: Copy Homepage assets (custom.css, banner)
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "0644"
+      loop:
+        - src: custom.css
+          dest: "{{ homepage_data_directory }}/custom.css"
+        - src: lyoko-banner.png
+          dest: "{{ homepage_images_directory }}/lyoko-banner.png"
+      register: homepage_assets
+
     - name: Create Homepage Docker Container
       community.docker.docker_container:
         name: "{{ homepage_container_name }}"
         image: "{{ homepage_image_name }}:{{ homepage_image_version }}"
-        restart: "{{ homepage_config is changed }}"
+        restart: "{{ homepage_config is changed or homepage_assets is changed }}"
         volumes:
           - "{{ homepage_data_directory }}:/app/config"
+          - "{{ homepage_images_directory }}:/app/public/images:ro"
           - "/var/run/docker.sock:/var/run/docker.sock:ro"
         env:
           TZ: "{{ core_timezone }}"

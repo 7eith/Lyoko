@@ -41,6 +41,7 @@ sudo ./scripts/backup-lyoko.sh /mnt/usb/lyoko-backup
 - [RadArr](https://radarr.video/) - Movies Manager
 - [ProfilArr](https://github.com/Dictionarry-Hub/profilarr) - Quality Profiles Manager ([My profiles](https://github.com/7eith/lyoko-arr-custom-formats))
 - [Diun](https://crazymax.github.io/diun/) - Docker image update notifications (Discord)
+- [Seerr](https://github.com/seerr-team/seerr/) - Software for managing requests for your media library
 
 ## 🔔 Update notifications
 

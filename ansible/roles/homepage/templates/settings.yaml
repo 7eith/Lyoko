@@ -1,4 +1,27 @@
 ---
 title: "{{ homepage_title }}"
 language: "{{ homepage_locale }}"
+theme: dark
+color: gray
+headerStyle: clean
+statusStyle: dot
+cardBlur: sm
+useEqualHeights: true
+hideVersion: true
 showStats: true
+layout:
+  Media:
+    icon: mdi-television-classic
+    columns: 4
+  Downloads:
+    icon: mdi-download
+    columns: 3
+  Services:
+    icon: mdi-shield-lock-outline
+    columns: 3
+  Networking:
+    icon: mdi-router-network
+    columns: 2
+  Developer:
+    icon: mdi-github
+    columns: 4
