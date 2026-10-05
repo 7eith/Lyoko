@@ -1,0 +1,12 @@
+seerr_enabled: true
+
+seerr_container_name: "seerr"
+seerr_image_name: "ghcr.io/seerr-team/seerr"
+seerr_image_version: "latest"
+
+seerr_domain: "seerr"
+
+seerr_config_directory: "{{ apps_directory }}/seerr"
+
+seerr_puid: "1000"
+seerr_pgid: "1000"

@@ -1,0 +1,33 @@
+---
+- name: Start Seerr
+  when: seerr_enabled is true
+  block:
+    - name: Create Seerr Directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      with_items:
+        - "{{ seerr_config_directory }}"
+
+    - name: Create Seerr Docker Container
+      community.docker.docker_container:
+        name: "{{ seerr_container_name }}"
+        image: "{{ seerr_image_name }}:{{ seerr_image_version }}"
+        user: "{{ seerr_puid }}:{{ seerr_pgid }}"
+        init: true
+        volumes:
+          - "{{ seerr_config_directory }}:/app/config"
+        env:
+          TZ: "{{ core_timezone }}"
+        networks:
+          - name: "proxy"
+        pull: true
+        restart_policy: unless-stopped
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.seerr.rule: "Host(`{{ seerr_domain }}.{{ lyoko_domain }}`)"
+          traefik.http.routers.seerr.entrypoints: "websecure"
+          traefik.http.routers.seerr.tls.certresolver: "cloudflare"
+          traefik.http.services.seerr.loadbalancer.server.port: "5055"
+          traefik.docker.network: "proxy"

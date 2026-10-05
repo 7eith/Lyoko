@@ -96,3 +96,8 @@
       tags:
         - profilarr
         - media
+
+    - role: seerr
+      tags:
+        - seerr
+        - media
